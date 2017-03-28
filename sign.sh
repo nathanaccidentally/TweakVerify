@@ -4,15 +4,18 @@
 
 echo "Signing tweak..."
 cd ~/Desktop/OSRestoreX/
+sleep 1
 
 previousSig="DEBIAN/_TweakSignature/signature"
 if [ -f "$previousSig" ]
 then
 	echo "Previous signature found."
 	rm -f DEBIAN/_TweakSignature/signature
+	sleep .5
 else
 	echo "Previous tweak signature not found."
 	mkdir DEBIAN/_TweakSignature
+	sleep .3
 fi
 
 echo "Writing MD5 to signature..."
@@ -47,13 +50,7 @@ if [ -f "$checkForPrerm" ]
 then
 	echo "Prerm script found."
 	prermMD5=$(MD5 DEBIAN/prerm)
-> DEBIAN/_TweakSignature/signature
-
-echo "Getting Author name from control package..."
-
-authorName=$(sed '8!d' DEBIAN/control)
-echo "$authorName"
-echo "$authorN	echo "$prermMD5"
+	echo "$prermMD5"
 	echo "Prerm MD5: $prermMD5" >> DEBIAN/_TweakSignature/signature
 
 	prermSha1=$(openssl sha1 DEBIAN/prerm)
@@ -63,23 +60,19 @@ else
 	echo "Prerm script not found."
 fi
 
-otherTweakFiles=$(find / -type f -name "*.xm")
-if [ -f "$otherTweakFiles" ]
-	then
-	otherTweakFilesMD5=$(md5 $otherTweakFiles)
-    otherTweakFilesSHA1=$(openssl sha1 $otherTweakFiles)
-    echo "Other Tweak Files MD5: $otherTweakFilesMD5"
-    echo "Other Tweak Files SHA1: $otherTweakFilesSHA1"
-    echo "Other Tweak Files MD5: $otherTweakFilesMD5" >> DEBIAN/_TweakSignature/signature
-    echo "Other Tweak Files SHA1: $otherTweakFilesSHA1" >> DEBIAN/_TweakSignature/signature
-else
-    echo "No other tweak files found."
-fi
-
+echo "Signing .xm files..."
+sleep .5
+find . -name '*.xm' -exec md5 >> DEBIAN/_TweakSignature/signature {} \;
 
 echo "" >> DEBIAN/_TweakSignature/signature
 echo "<--- End of file hashes --->" >> DEBIAN/_TweakSignature/signature
-echo "" >ame" >> DEBIAN/_TweakSignature/signature
+echo "" >> DEBIAN/_TweakSignature/signature
+
+echo "Getting Author name from control package..."
+
+authorName=$(sed '8!d' DEBIAN/control)
+echo "$authorName"
+echo "$authorName" >> DEBIAN/_TweakSignature/signature
 
 echo "" >> DEBIAN/_TweakSignature/signature
 echo "<--- End of control stuff --->" >> DEBIAN/_TweakSignature/signature
