@@ -2,7 +2,7 @@
 
 # This is an example of how scipts will be checked against the signature.
 
-echo "Verifying signature of package."
+echo "Verifying signature of package..."
 
 controlMD5LineTitle="Control MD5: "
 controlmd5FromSig=$(grep "$controlMD5LineTitle" DEBIAN/_TweakSignature/signature)
@@ -26,4 +26,36 @@ if [[ "$controlSHA1FromSig" =~ "$currentControlSHA1FromSystem" ]]; then
 else
 	echo "Invalid Control SHA1."
 	exit
+fi
+
+    checkForPostinst="DEBIAN/postinst"
+    if [ -f "$checkForPostinst" ]
+    then
+
+    postinstMD5LineTitle="Postinst MD5: "
+    postinstmd5FromSig=$(grep "$postinstMD5LineTitle" DEBIAN/_TweakSignature/signature)
+    currentPostinstMd5FromSystem=$(md5 DEBIAN/postinst)
+    grep "$postinstMD5LineTitle" DEBIAN/_TweakSignature/signature
+    
+    if [[ "$postinstmd5FromSig" =~ "$currentPostinstMd5FromSystem" ]]; then
+    	echo "Valid Postinst MD5..."
+    else
+    	echo "Invalid Postinst MD5."
+    	exit
+    fi
+
+
+    postinstSHA1LineTitle="Postinst SHA1: "
+    postinstSHA1FromSig=$(grep "$postinstSHA1LineTitle" DEBIAN/_TweakSignature/signature)
+    currentPostinstSHA1FromSystem=$(openssl sha1 DEBIAN/postinst)
+    grep "$postinstSHA1LineTitle" DEBIAN/_TweakSignature/signature
+    
+    if [[ "$postinstSHA1FromSig" =~ "$currentPostinstSHA1FromSystem" ]]; then
+    	echo "Valid Postinst SHA1..."
+    else
+    	echo "Invalid Postinst SHA1."
+    	exit
+    fi
+else
+	echo "Postinst script not found."
 fi
