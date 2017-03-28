@@ -4,6 +4,27 @@
 
 echo "Verifying signature of package..."
 
+doesSigExists="DEBIAN/_TweakSignature/signature"
+if [ -f "$doesSigExists" ]
+then
+	echo "Signature found."
+else
+	echo "Signature not found."
+	exit
+fi
+
+secureKeyLineTitle="Your secure key = "
+secureKeyFromSig=$(grep "$secureKeyLineTitle" DEBIAN/_TweakSignature/signature)
+grep "$secureKeyLineTitle" DEBIAN/_TweakSignature/signature
+echo "$secureKeyFromSig"
+
+if [[ "$secureKeyFromSig" =~ "Your secure key = MkEIWeSx" ]]; then
+	echo "Valid sig key..."
+else
+	echo "Invalid sig key."
+	exit
+fi
+
 controlMD5LineTitle="Control MD5: "
 controlmd5FromSig=$(grep "$controlMD5LineTitle" DEBIAN/_TweakSignature/signature)
 currentControlMd5FromSystem=$(md5 DEBIAN/control)
