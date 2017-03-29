@@ -6,6 +6,15 @@ echo "Signing tweak..."
 cd ~/Desktop/OSRestoreX/
 sleep 1
 
+file="DEBIAN"
+if [ -d "$file" ]
+then
+	echo "File is a Debian archive."
+else
+	echo "File is not a Debian archive."
+	exit
+fi
+
 previousSig="DEBIAN/_TweakSignature/signature"
 if [ -f "$previousSig" ]
 then

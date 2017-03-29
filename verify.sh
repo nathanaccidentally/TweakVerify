@@ -81,3 +81,14 @@ fi
 else
 	echo "Postinst script not found."
 fi
+
+echo "Trying to verify .xm files..."
+find . -name '*.xm' -exec md5 {} \;
+echo -n "Do these hashes look right? I can't verify them automatically (y / n) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+    echo "OK. Done."
+else
+    echo "Quitting."
+    exit
+fi
