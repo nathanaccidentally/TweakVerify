@@ -93,7 +93,14 @@ echo "Your secure key = $superSafeAndSecureKey"
 echo "Your secure key = $superSafeAndSecureKey" >> DEBIAN/_TweakSignature/signature
 
 echo "Building package..."
-dpkg -b ~/Desktop/OSRestoreX
-echo "Done!"
+echo -n "Would you like to use theos or dpkg to build package. Use 't' for theos and 'd' for dpkg. "
+read answer
+if echo "$answer" | grep -iq "^t" ;then
+    make package
+    echo "Done!"
+else
+    dpkg -b ~/Desktop/OSRestoreX
+    echo "Done!"
+fi
 
 exit
