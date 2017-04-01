@@ -1,9 +1,0 @@
-Package: com.nathanaccidentally.dpkgsign
-Name: DPKGSign
-Version: 1.0
-Architecture: iphoneos-arm
-Pre-Depends: dpkg (>= 1.13.25-5)
-Description: A simple and secure tool for tweak signing and validation.
-Maintainer: nathanaccidentally <nathanaccidentally@gmail.com>
-Author: nathanaccidentally <nathanaccidentally@gmail.com>
-Section: System
