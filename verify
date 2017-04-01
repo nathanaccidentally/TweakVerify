@@ -4,7 +4,7 @@
 
 echo "Verifying signature of package..."
 
-doesSigExists="DEBIAN/_TweakSignature/signature"
+doesSigExists="DEBIAN/signature"
 if [ -f "$doesSigExists" ]
 then
 	echo "Signature found."
@@ -14,8 +14,8 @@ else
 fi
 
 secureKeyLineTitle="Your secure key = "
-secureKeyFromSig=$(grep "$secureKeyLineTitle" DEBIAN/_TweakSignature/signature)
-grep "$secureKeyLineTitle" DEBIAN/_TweakSignature/signature
+secureKeyFromSig=$(grep "$secureKeyLineTitle" DEBIAN/signature)
+grep "$secureKeyLineTitle" DEBIAN/signature
 
 echo -n "This is the key I got from the signature: $secureKeyFromSig. Would you like to continue? "
 read answer
@@ -27,9 +27,9 @@ else
 fi
 
 controlMD5LineTitle="Control MD5: "
-controlmd5FromSig=$(grep "$controlMD5LineTitle" DEBIAN/_TweakSignature/signature)
+controlmd5FromSig=$(grep "$controlMD5LineTitle" DEBIAN/signature)
 currentControlMd5FromSystem=$(md5 DEBIAN/control)
-grep "$controlMD5LineTitle" DEBIAN/_TweakSignature/signature
+grep "$controlMD5LineTitle" DEBIAN/signature
 
 if [[ "$controlmd5FromSig" =~ "$currentControlMd5FromSystem" ]]; then
 	echo "Valid Control MD5..."
@@ -39,9 +39,9 @@ else
 fi
 
 controlSHA1LineTitle="Control SHA1: "
-controlSHA1FromSig=$(grep "$controlSHA1LineTitle" DEBIAN/_TweakSignature/signature)
+controlSHA1FromSig=$(grep "$controlSHA1LineTitle" DEBIAN/signature)
 currentControlSHA1FromSystem=$(openssl sha1 DEBIAN/control)
-grep "$controlSHA1LineTitle" DEBIAN/_TweakSignature/signature
+grep "$controlSHA1LineTitle" DEBIAN/signature
 
 if [[ "$controlSHA1FromSig" =~ "$currentControlSHA1FromSystem" ]]; then
 	echo "Valid Control SHA1..."
@@ -55,9 +55,9 @@ fi
     then
 
     postinstMD5LineTitle="Postinst MD5: "
-    postinstmd5FromSig=$(grep "$postinstMD5LineTitle" DEBIAN/_TweakSignature/signature)
+    postinstmd5FromSig=$(grep "$postinstMD5LineTitle" DEBIAN/signature)
     currentPostinstMd5FromSystem=$(md5 DEBIAN/postinst)
-    grep "$postinstMD5LineTitle" DEBIAN/_TweakSignature/signature
+    grep "$postinstMD5LineTitle" DEBIAN/signature
     
     if [[ "$postinstmd5FromSig" =~ "$currentPostinstMd5FromSystem" ]]; then
     	echo "Valid Postinst MD5..."
@@ -68,9 +68,9 @@ fi
 
 
     postinstSHA1LineTitle="Postinst SHA1: "
-    postinstSHA1FromSig=$(grep "$postinstSHA1LineTitle" DEBIAN/_TweakSignature/signature)
+    postinstSHA1FromSig=$(grep "$postinstSHA1LineTitle" DEBIAN/signature)
     currentPostinstSHA1FromSystem=$(openssl sha1 DEBIAN/postinst)
-    grep "$postinstSHA1LineTitle" DEBIAN/_TweakSignature/signature
+    grep "$postinstSHA1LineTitle" DEBIAN/signature
     
     if [[ "$postinstSHA1FromSig" =~ "$currentPostinstSHA1FromSystem" ]]; then
     	echo "Valid Postinst SHA1..."
