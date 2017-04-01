@@ -2,6 +2,15 @@
 
 # This is an example of how scipts will be checked against the signature.
 
+if [ -n "$1" ]; then
+    echo "Recieved file from input. Extracting...";
+    mkdir DEBIAN
+    dpkg -e $1 DEBIAN
+    echo "Extracted deb file."
+else
+    echo "No deb file recieved. Assuming you're in signed tweak folder.";
+fi
+
 echo "Verifying signature of package..."
 
 doesSigExists="DEBIAN/signature"
