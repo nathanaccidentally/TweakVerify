@@ -6,6 +6,8 @@ I've laid groundwork for this project to become much more useful as I work on it
 
 The code "signature" file along with the key are inside `DEBIAN/signature` of your package and can be used however you'd like while checking or with other scripts.
 
+See an example here: https://www.youtube.com/watch?v=LuWeDVS-T0c&feature=youtu.be
+
 ## How do I use it?
 Step 1: **Find a Terminal.**
 
