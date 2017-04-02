@@ -150,3 +150,11 @@ else
     echo "Quitting."
     exit
 fi
+
+echo "All done with checking! Running cleanup."
+if [ -n "$1" ]; then
+    cd ~/Desktop
+    rm -r TempTweaksignFolder
+else
+    echo "Nothing to clean up.";
+fi
