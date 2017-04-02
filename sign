@@ -87,6 +87,21 @@ else
 	echo "Prerm script not found."
 fi
 
+checkForExtrainst="DEBIAN/extrainst_"
+if [ -f "$checkForExtrainst" ]
+then
+	echo "extrainst_ script found."
+	extrainstMD5=$(MD5 DEBIAN/extrainst_)
+	echo "$extrainstMD5"
+	echo "extrainst_ MD5: $extrainstMD5" >> DEBIAN/signature
+
+	extrainstSha1=$(openssl sha1 DEBIAN/extrainst_)
+	echo "$extrainstSha1"
+	echo "extrainst_ SHA1: $extrainstSha1" >> DEBIAN/signature
+else
+	echo "Prerm script not found."
+fi
+
 echo "Signing .xm files..."
 sleep .5
 find . -name '*.xm' -exec md5 >> DEBIAN/signature {} \;

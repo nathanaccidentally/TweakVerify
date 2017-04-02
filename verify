@@ -105,6 +105,38 @@ else
 	echo "Postinst script not found."
 fi
 
+    checkForExtrainst="DEBIAN/extrainst_"
+    if [ -f "$checkForExtrainst" ]
+    then
+
+    extrainstMD5LineTitle="extrainst_ MD5: "
+    extrainstmd5FromSig=$(grep "$extrainstMD5LineTitle" DEBIAN/signature)
+    currentExtrainstMd5FromSystem=$(md5 DEBIAN/extrainst_)
+    grep "$extrainstMD5LineTitle" DEBIAN/signature
+    
+    if [[ "$extrainstmd5FromSig" =~ "$currentExtrainstMd5FromSystem" ]]; then
+        echo "Valid extrainst_ MD5..."
+    else
+        echo "⚠️ Invalid extrainst_ MD5.⚠️ "
+        exit
+    fi
+
+
+    extrainstSHA1LineTitle="extrainst_ SHA1: "
+    extainstSHA1FromSig=$(grep "$extrainstSHA1LineTitle" DEBIAN/signature)
+    currentExtrainstSHA1FromSystem=$(openssl sha1 DEBIAN/extrainst_)
+    grep "$extrainstSHA1LineTitle" DEBIAN/signature
+    
+    if [[ "$extrainstSHA1FromSig" =~ "$currentExtrainstSHA1FromSystem" ]]; then
+        echo "Valid extrainst_ SHA1..."
+    else
+        echo "⚠️ Invalid extrainst_ SHA1.⚠️ "
+        exit
+    fi
+else
+    echo "extrainst_ script not found."
+fi
+
 echo "Trying to verify .xm files..."
 find . -name '*.xm' -exec md5 {} \;
 echo -n "Do these hashes look right? I can't verify them automatically (y / n) "
