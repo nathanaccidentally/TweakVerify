@@ -9,6 +9,10 @@ if [ -n "$1" ]; then
     cd $1
 fi
 
+if [ -n "$2" ]; then
+    echo "Sorry, but tweaksign cannot sign more than one folder at a time.";
+fi
+
 echo "Checking if you have dpkg installed..."
 if dpkg --help >/dev/null ; then
 	echo "Dpkg is installed. Will finish process."
