@@ -23,7 +23,7 @@ Step 2: **Run `verify whatever.deb` and follow the prompts.**
 ## What does this do?
 It creates a signature file within `DEBIAN/signature` of your tweaks before they're built so they can be checked against by users as an extra security step.
 
-It saves things like the MD5 and SHA1 of the control file, any postinst, prerm, extrainst____, and any .xm files and they're checked against the system when verification is started.
+It saves things like the MD5 and SHA1 of the control file, any postinst, prerm, extrainst, and any .xm files and they're checked against the system when verification is started.
 
 ## What is the 'Secret Key'?
 The secret key is a random 8 digit key created that is stored in the signature file. Devs can distribute this key however they'd like so that users checking the signature can be sure they're looking at the correct file.
