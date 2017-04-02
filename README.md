@@ -8,10 +8,14 @@ The code "signature" file along with the key are inside `DEBIAN/signature` of yo
 
 ## How do I use it?
 Step 1: **Find a Terminal.**
+
 Step 2: **Find a tweak to sign and compile.**
+
 Step 3: **Run `cd /path/to/tweak/folder`**
+
 Step 4: **Distribute however you'd like!**
 
 ## How can I verify the signature of deb files or extracted debs?
 Step 1: **Create a new folder wherever you'd like and `cd` into the folder you made.**
+
 Step 2: **Run `verify whatever.deb` and follow the prompts.**
