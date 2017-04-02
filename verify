@@ -38,7 +38,7 @@ fi
 
 secureKeyLineTitle="Your secure key = "
 secureKeyFromSig=$(grep "$secureKeyLineTitle" DEBIAN/signature)
-grep "$secureKeyLineTitle" DEBIAN/signature
+grep "$secureKeyLineTitle" DEBIAN/signature >/dev/null
 
 echo -n "This is the key I got from the signature: $secureKeyFromSig. Would you like to continue? "
 read answer
