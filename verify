@@ -14,6 +14,9 @@ fi
 
 if [ -n "$1" ]; then
     echo "Recieved file from input. Extracting...";
+    cd ~/Desktop/
+    mkdir TempTweaksignFolder
+    cd TempTweaksignFolder
     mkdir DEBIAN
     dpkg -e $1 DEBIAN
     echo "Extracted deb file."
