@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Welcome to TweakSign, a new way to sign tweaks and verify their security. Built by nathanaccidentally.
+# Copyright (c) 2017 Nathan Goodwin and licensed under the MIT licinse.
+# These lines must be included in any forks or redistributions and this project may not be claimed as your own.
 
 if [ -n "$1" ]; then
     echo "Signing multiple packages at the same time is not permitted."; exit
@@ -10,8 +12,7 @@ echo "Checking if you have dpkg installed..."
 if dpkg --help >/dev/null ; then
 	echo "Dpkg is installed. Will finish process."
 else
-	echo "Dpkg is not installed and is required for TweakSign to work properly. Please install and try again."
-	exit
+	echo "Seems like dpkg isn't installed, TweakSign cannot work without it. Please install dpkg and try again."
 fi
 
 echo "Signing tweak..."
