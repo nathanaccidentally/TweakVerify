@@ -9,4 +9,4 @@ The code "signature" file along with the key are inside `DEBIAN/signature` of yo
 ## How can I use it?
 
 Step 1: **Find a Terminal:**
-![Terminal](https://dl.dropboxusercontent.com/s/c7t1zdgs2jcbcvd/step1.gif?dl=0)
+![Terminal](https://dl.dropboxusercontent.com/s/c7t1zdgs2jcbcvd/step1.gif)
