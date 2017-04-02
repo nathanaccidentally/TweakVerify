@@ -11,6 +11,10 @@ else
     echo "No deb file recieved. Assuming you're in signed tweak folder.";
 fi
 
+if [ -n "$2" ]; then
+    echo "Sorry, TweakSign currently doesn't support verifying more than 1 deb package at a time.";
+fi
+
 echo "Verifying signature of package..."
 
 doesSigExists="DEBIAN/signature"

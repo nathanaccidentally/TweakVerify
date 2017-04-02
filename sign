@@ -2,6 +2,10 @@
 
 # Welcome to TweakSign, a new way to sign tweaks and verify their security. Built by nathanaccidentally.
 
+if [ -n "$1" ]; then
+    echo "Signing multiple packages at the same time is not permitted."; exit
+fi
+
 echo "Signing tweak..."
 sleep 1
 
