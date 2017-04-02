@@ -8,6 +8,8 @@ The code "signature" file along with the key are inside `DEBIAN/signature` of yo
 
 See an example here: https://www.youtube.com/watch?v=LuWeDVS-T0c&feature=youtu.be
 
+**Donations can be made by purchacing an Amazon card [here](https://www.amazon.com/gp/product/B0145WHYKC/ref=s9_acss_bw_cg_gclptcg_2a1_w?pf_rd_m=ATVPDKIKX0DER&pf_rd_s=merchandised-search-1&pf_rd_r=B88M5PV4XQ4R3R8S26MF&pf_rd_t=101&pf_rd_p=2120cd97-b2d2-47db-9a65-1c678be2a6e7&pf_rd_i=2238192011) and sending it to nathanaccidentally@gmail.com. Thanks! :)**
+
 ## How do I use it?
 Step 1: **Find a Terminal.**
 
