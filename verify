@@ -2,6 +2,14 @@
 
 # This is an example of how scipts will be checked against the signature.
 
+echo "Checking if you have dpkg installed..."
+if dpkg --help >/dev/null ; then
+    echo "Dpkg is installed. Will finish process."
+else
+    echo "Dpkg is not installed and is required for TweakSign to work properly. Please install and try again."
+    exit
+fi
+
 if [ -n "$1" ]; then
     echo "Recieved file from input. Extracting...";
     mkdir DEBIAN

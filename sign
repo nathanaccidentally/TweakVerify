@@ -6,6 +6,14 @@ if [ -n "$1" ]; then
     echo "Signing multiple packages at the same time is not permitted."; exit
 fi
 
+echo "Checking if you have dpkg installed..."
+if dpkg --help >/dev/null ; then
+	echo "Dpkg is installed. Will finish process."
+else
+	echo "Dpkg is not installed and is required for TweakSign to work properly. Please install and try again."
+	exit
+fi
+
 echo "Signing tweak..."
 sleep 1
 
