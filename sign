@@ -57,10 +57,10 @@ echo "Control MD5: $controlMd5" >> DEBIAN/signature
 
 echo "Finished writing MD5 signature of control file."
 
-echo "Writing SHA1 to signature..."
-controlSha1=$(openssl sha1 DEBIAN/control)
-echo "$controlSha1"
-echo "Control SHA1: $controlSha1" >> DEBIAN/signature
+echo "Writing SHA256 to signature..."
+controlSHA256=$(shasum -a 256 DEBIAN/control)
+echo "$controlSHA256"
+echo "Control SHA256: $controlSHA256" >> DEBIAN/signature
 
 checkForPostinst="DEBIAN/postinst"
 if [ -f "$checkForPostinst" ]
@@ -70,9 +70,9 @@ then
 	echo "$postinstMD5"
 	echo "Postinst MD5: $postinstMD5" >> DEBIAN/signature
 
-	postinstSha1=$(openssl sha1 DEBIAN/postinst)
-	echo "$postinstSha1"
-	echo "Postinst SHA1: $postinstSha1" >> DEBIAN/signature
+	postinstSHA256=$(shasum -a 256 DEBIAN/postinst)
+	echo "$postinstSHA256"
+	echo "Postinst SHA256: $postinstSHA256" >> DEBIAN/signature
 else
 	echo "Postinst script not found."
 fi
@@ -85,9 +85,9 @@ then
 	echo "$prermMD5"
 	echo "Prerm MD5: $prermMD5" >> DEBIAN/signature
 
-	prermSha1=$(openssl sha1 DEBIAN/prerm)
-	echo "$prermSha1"
-	echo "Prerm SHA1: $prermSha1" >> DEBIAN/signature
+	prermSHA256=$(shasum -a 256 DEBIAN/prerm)
+	echo "$prermSHA256"
+	echo "Prerm SHA256: $prermSHA256" >> DEBIAN/signature
 else
 	echo "Prerm script not found."
 fi
@@ -100,9 +100,9 @@ then
 	echo "$extrainstMD5"
 	echo "extrainst_ MD5: $extrainstMD5" >> DEBIAN/signature
 
-	extrainstSha1=$(openssl sha1 DEBIAN/extrainst_)
-	echo "$extrainstSha1"
-	echo "extrainst_ SHA1: $extrainstSha1" >> DEBIAN/signature
+	extrainstSHA256=$(shasum -a 256 DEBIAN/extrainst_)
+	echo "$extrainstSHA256"
+	echo "extrainst_ SHA256: $extrainstSHA256" >> DEBIAN/signature
 else
 	echo "Prerm script not found."
 fi
@@ -125,10 +125,10 @@ echo "" >> DEBIAN/signature
 echo "<--- End of control stuff --->" >> DEBIAN/signature
 echo "" >> DEBIAN/signature
 
-echo "Generating secure key used to install package..."
+echo "Generating 8 digit key."
 superSafeAndSecureKey=$(cat /dev/random | LC_CTYPE=C tr -dc "[:alpha:]" | head -c 8)
-echo "Your secure key = $superSafeAndSecureKey"
-echo "Your secure key = $superSafeAndSecureKey" >> DEBIAN/signature
+echo "Your key = $superSafeAndSecureKey"
+echo "Your key = $superSafeAndSecureKey" >> DEBIAN/signature
 
 echo "Building package..."
 echo -n "Would you like to use theos or dpkg to build package. Use 't' for theos and 'd' for dpkg. "

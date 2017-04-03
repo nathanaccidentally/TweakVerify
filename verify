@@ -39,11 +39,11 @@ else
 	exit
 fi
 
-secureKeyLineTitle="Your secure key = "
-secureKeyFromSig=$(grep "$secureKeyLineTitle" DEBIAN/signature)
-grep "$secureKeyLineTitle" DEBIAN/signature >/dev/null
+KeyLineTitle="Your key = "
+KeyFromSig=$(grep "$KeyLineTitle" DEBIAN/signature)
+grep "$KeyLineTitle" DEBIAN/signature >/dev/null
 
-echo -n "This is the key I got from the signature: $secureKeyFromSig. Would you like to continue? "
+echo -n "This is the key I got from the signature: $KeyFromSig. Would you like to continue? "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
     echo "OK. Will keep doing verification."
@@ -64,15 +64,15 @@ else
 	exit
 fi
 
-controlSHA1LineTitle="Control SHA1: "
-controlSHA1FromSig=$(grep "$controlSHA1LineTitle" DEBIAN/signature)
-currentControlSHA1FromSystem=$(openssl sha1 DEBIAN/control)
-grep "$controlSHA1LineTitle" DEBIAN/signature
+controlSHA256LineTitle="Control SHA256: "
+controlSHA256FromSig=$(grep "$controlSHA256LineTitle" DEBIAN/signature)
+currentControlSHA256FromSystem=$(shasum -a 256 DEBIAN/control)
+grep "$controlSHA256LineTitle" DEBIAN/signature
 
-if [[ "$controlSHA1FromSig" =~ "$currentControlSHA1FromSystem" ]]; then
-	echo "Valid Control SHA1..."
+if [[ "$controlSHA256FromSig" =~ "$currentControlSHA256FromSystem" ]]; then
+	echo "Valid Control SHA256..."
 else
-	echo "⚠️ Invalid Control SHA1.⚠️ "
+	echo "⚠️ Invalid Control SHA256.⚠️ "
 	exit
 fi
 
@@ -93,15 +93,15 @@ fi
     fi
 
 
-    postinstSHA1LineTitle="Postinst SHA1: "
-    postinstSHA1FromSig=$(grep "$postinstSHA1LineTitle" DEBIAN/signature)
-    currentPostinstSHA1FromSystem=$(openssl sha1 DEBIAN/postinst)
-    grep "$postinstSHA1LineTitle" DEBIAN/signature
+    postinstSHA256LineTitle="Postinst SHA256: "
+    postinstSHA256FromSig=$(grep "$postinstSHA256LineTitle" DEBIAN/signature)
+    currentPostinstSHA256FromSystem=$(shasum -a 256 DEBIAN/postinst)
+    grep "$postinstSHA256LineTitle" DEBIAN/signature
     
-    if [[ "$postinstSHA1FromSig" =~ "$currentPostinstSHA1FromSystem" ]]; then
-    	echo "Valid Postinst SHA1..."
+    if [[ "$postinstSHA256FromSig" =~ "$currentPostinstSHA256FromSystem" ]]; then
+    	echo "Valid Postinst SHA256..."
     else
-    	echo "⚠️ Invalid Postinst SHA1.⚠️ "
+    	echo "⚠️ Invalid Postinst SHA256.⚠️ "
     	exit
     fi
 else
@@ -125,15 +125,15 @@ fi
     fi
 
 
-    extrainstSHA1LineTitle="extrainst_ SHA1: "
-    extainstSHA1FromSig=$(grep "$extrainstSHA1LineTitle" DEBIAN/signature)
-    currentExtrainstSHA1FromSystem=$(openssl sha1 DEBIAN/extrainst_)
-    grep "$extrainstSHA1LineTitle" DEBIAN/signature
+    extrainstSHA256LineTitle="extrainst_ SHA256: "
+    extainstSHA256FromSig=$(grep "$extrainstSHA256LineTitle" DEBIAN/signature)
+    currentExtrainstSHA256FromSystem=$(shasum -a 256 DEBIAN/extrainst_)
+    grep "$extrainstSHA256LineTitle" DEBIAN/signature
     
-    if [[ "$extrainstSHA1FromSig" =~ "$currentExtrainstSHA1FromSystem" ]]; then
-        echo "Valid extrainst_ SHA1..."
+    if [[ "$extrainstSHA256FromSig" =~ "$currentExtrainstSHA256FromSystem" ]]; then
+        echo "Valid extrainst_ SHA256..."
     else
-        echo "⚠️ Invalid extrainst_ SHA1.⚠️ "
+        echo "⚠️ Invalid extrainst_ SHA256.⚠️ "
         exit
     fi
 else
