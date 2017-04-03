@@ -111,6 +111,10 @@ echo "Signing .xm files..."
 sleep .5
 find . -name '*.xm' -exec md5 >> DEBIAN/signature {} \;
 
+echo "Signing .dylib files..."
+sleep .5
+find . -name '*.dylib' -exec md5 >> DEBIAN/signature {} \;
+
 echo "" >> DEBIAN/signature
 echo "<--- End of file hashes --->" >> DEBIAN/signature
 echo "" >> DEBIAN/signature
