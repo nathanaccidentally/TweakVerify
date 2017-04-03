@@ -151,6 +151,17 @@ else
     exit
 fi
 
+echo "Trying to verify .dylib files..."
+find . -name '*.dylib' -exec md5 {} \;
+echo -n "Do these hashes look right? I can't verify them automatically (y / n) "
+read answer
+if echo "$answer" | grep -iq "^y" ;then
+    echo "OK. Done."
+else
+    echo "Quitting."
+    exit
+fi
+
 echo "All done with checking! Running cleanup."
 if [ -n "$1" ]; then
     cd ~/Desktop
