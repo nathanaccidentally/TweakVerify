@@ -134,6 +134,11 @@ superSafeAndSecureKey=$(cat /dev/random | LC_CTYPE=C tr -dc "[:alpha:]" | head -
 echo "Your key = $superSafeAndSecureKey"
 echo "Your key = $superSafeAndSecureKey" >> DEBIAN/signature
 
+echo "Changing permissions of signature..."
+chflags hidden DEBIAN/signature
+chmod 000 DEBIAN/signature
+chmod a-w DEBIAN/signature
+
 echo "Building package..."
 echo -n "Would you like to use theos or dpkg to build package. Use 't' for theos and 'd' for dpkg. "
 read answer
