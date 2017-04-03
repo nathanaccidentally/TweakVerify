@@ -20,6 +20,12 @@ if [ -n "$1" ]; then
     mkdir DEBIAN
     dpkg -e $1 DEBIAN
     echo "Extracted deb file."
+
+    echo "Patching signature..."
+    chflags hidden DEBIAN/signature
+    chmod 000 DEBIAN/signature
+    chmod a-w DEBIAN/signature
+    echo "Signature Patched..."
 else
     echo "No deb file recieved. Assuming you're in signed tweak folder.";
 fi
@@ -150,6 +156,7 @@ else
     echo "Quitting."
     exit
 fi
+# I need to find a way to do this automatically.
 
 echo "Trying to verify .dylib files..."
 find . -name '*.dylib' -exec md5 {} \;
