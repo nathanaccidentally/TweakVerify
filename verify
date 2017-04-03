@@ -19,6 +19,7 @@ if [ -n "$1" ]; then
     cd TempTweaksignFolder
     mkdir DEBIAN
     dpkg -e $1 DEBIAN
+    dpkg -x $1 $PWD
     echo "Extracted deb file."
 
     echo "Patching signature..."
@@ -130,7 +131,6 @@ fi
         exit
     fi
 
-
     extrainstSHA256LineTitle="extrainst_ SHA256: "
     extainstSHA256FromSig=$(grep "$extrainstSHA256LineTitle" DEBIAN/signature)
     currentExtrainstSHA256FromSystem=$(shasum -a 256 DEBIAN/extrainst_)
@@ -146,20 +146,20 @@ else
     echo "extrainst_ script not found."
 fi
 
-echo "Trying to verify .xm files..."
-find . -name '*.xm' -exec md5 {} \;
-echo -n "Do these hashes look right? I can't verify them automatically (y / n) "
-read answer
-if echo "$answer" | grep -iq "^y" ;then
-    echo "OK. Done."
+echo "Attempting to auto-verify .dylib files..."
+allDylibFiles=$(find Library/MobileSubstrate -name '*.dylib')
+findDylibFilesMD5=$(grep "MD5 ($allDylibFiles)" DEBIAN/signature)
+getDylibmd5=$(md5 $allDylibFiles)
+
+if [[ "$getDylibmd5" =~ "$findDylibFilesMD5" ]]; then
+    echo "Valid $allDylibFiles MD5..."
 else
-    echo "Quitting."
+    echo "⚠️ Invalid $allDylibFiles MD5.⚠️ "
     exit
 fi
-# I need to find a way to do this automatically.
 
 echo "Trying to verify .dylib files..."
-find . -name '*.dylib' -exec md5 {} \;
+find Library/MobileSubstrate -name '*.dylib' -exec md5 {} \;
 echo -n "Do these hashes look right? I can't verify them automatically (y / n) "
 read answer
 if echo "$answer" | grep -iq "^y" ;then
