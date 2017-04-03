@@ -144,6 +144,7 @@ echo -n "Would you like to use theos or dpkg to build package. Use 't' for theos
 read answer
 if echo "$answer" | grep -iq "^t" ;then
     make package
+    echo "Package seems to be built. Please run dpkg -e and -x to actuall sign correctly."
     echo "Done!"
 else
     dpkg -b $PWD
