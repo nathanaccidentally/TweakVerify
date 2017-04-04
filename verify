@@ -21,6 +21,7 @@ if [ -n "$1" ]; then
     dpkg -e $1 DEBIAN
     dpkg -x $1 $PWD
     echo "Extracted deb file."
+    ls
 
     echo "Patching signature..."
     chflags hidden DEBIAN/signature
