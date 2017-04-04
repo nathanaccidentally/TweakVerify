@@ -25,7 +25,7 @@ Step 1: **Create a new folder wherever you'd like and `cd` into the folder you m
 Step 2: **Run `verify whatever.deb` and follow the prompts.**
 
 ## What does this do?
-It creates a signature file within `DEBIAN/signature` of your tweaks before they're built so they can be checked against by users as an extra security step.
+It creates a signature file within `DEBIAN/signature` of your tweaks before they're built so they can be checked against by users as an extra verification step.
 
 It saves things like the MD5 and SHA1 of the control file, any postinst, prerm, extrainst, and any .dylib (holy glob that was hard to pull off) files and they're checked against the system when verification is started.
 
