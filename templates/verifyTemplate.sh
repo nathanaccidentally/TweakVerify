@@ -1,8 +1,8 @@
 # This is a template for checking the signature to the system.
 
 # Welcome to TweakSign, a new way to sign tweaks and verify their security. Built by nathanaccidentally.
-# Copyright (c) 2017 Nathan Goodwin and licensed under the MIT licinse.
-# These lines must be included in any forks or redistributions and this project may not be claimed as your own.
+# Written in 2016/2017 by Nathan Goodwin and licensed under the MIT licinse.
+# It is not required to include credit for any use or redistribution of this project.
 
     checkForFile="DEBIAN/fileToCheck"
     if [ -f "$checkForFile" ]
