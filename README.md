@@ -2,8 +2,6 @@
 
 Welcome to TweakSign! An easy way to securley build and distribute tweaks.
 
-I've laid groundwork for this project to become much more useful as I work on it more. You can use it on macOS and Linux with no current support for on device signing.
-
 The code "signature" file along with the key are inside `DEBIAN/signature` of your package and can be used however you'd like while checking or with other scripts. A simplified signing template is avalible for modificaiton and redistribution inside `master/templates`.
 
 ## How do I use it?
