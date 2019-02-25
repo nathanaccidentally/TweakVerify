@@ -10,7 +10,7 @@ Step 1: **Open Terminal.**
 Step 2: **Drag TweakSign into the Terminal followed by the folder for your project and hit enter.**
 
 ## How can I verify the signature of deb files or extracted debs?
-Step 1: **Drag the TweakSign verify fine into Terminal followed by the deb file you want to check and hit enter.**
+Step 1: **Drag the TweakSign verify file into Terminal followed by the deb file you want to check and hit enter.**
 
 ## What does this do?
 It creates a signature file within `DEBIAN/signature` of your tweaks before they're built so they can be checked by users as an extra verification step.
